@@ -1,19 +1,15 @@
 import axios from "axios"
 import { Project, ProjectRequest, ServiceOrder, ServiceOrderRequest } from "../types"
 
-// API URL from environment
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api"
 
-// Create an axios instance
 export const api = axios.create({
   baseURL: API_URL,
 })
 
-// Add a request interceptor to add the auth token to requests
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("accessToken")
-    console.log(token)
     if (token) {
       config.headers.Authorization = `Bearer ${token}`
     }
@@ -22,7 +18,6 @@ api.interceptors.request.use(
   (error) => Promise.reject(error),
 )
 
-// Project API functions
 export const projectApi = {
   getAll: () => api.get<{ data: Project[], total: number }>("/projects"),
   getById: (id: string) => api.get<Project>(`/projects/${id}`),
@@ -31,7 +26,6 @@ export const projectApi = {
   delete: (id: string) => api.delete(`/projects/${id}`),
 }
 
-// ServiceOrder API functions
 export const serviceOrderApi = {
   getAll: () => api.get<{ data: ServiceOrder[], total: number }>("/service-orders"),
   getById: (id: string) => api.get<ServiceOrder>(`/service-orders/${id}`),

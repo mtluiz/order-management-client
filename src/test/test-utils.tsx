@@ -10,7 +10,6 @@ interface AllProvidersProps {
   children: ReactNode;
 }
 
-// Wrapper that includes all providers
 export const AllProviders = ({ children }: AllProvidersProps) => {
   return (
     <BrowserRouter>
@@ -19,13 +18,13 @@ export const AllProviders = ({ children }: AllProvidersProps) => {
   );
 };
 
-// Custom render with providers
+
 export const renderWithProviders = (
   ui: ReactElement,
   options?: Omit<RenderOptions, 'wrapper'>
 ) => render(ui, { wrapper: AllProviders, ...options });
 
-// Mock navigation
+
 export const mockNavigate = () => {
   const navigateMock = vi.fn();
   vi.mock('react-router-dom', async () => {

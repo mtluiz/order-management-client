@@ -11,6 +11,7 @@ interface AuthContextType {
   login: (email: string, password: string) => Promise<void>
   register: (username: string, email: string, password: string) => Promise<void>
   logout: () => void
+  checkAuth: () => Promise<User | null>
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
@@ -27,23 +28,24 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const token = localStorage.getItem("accessToken")
-        if (token) {
-          const response = await api.get("/auth/login")
-          setUser(response.data.user)
-        }
-      } catch (error) {
-        console.log(error)
-        localStorage.removeItem("accessToken")
-        setUser(null)
-      } finally {
-        setLoading(false)
+  const checkAuth = async () => {
+    try {
+      const token = localStorage.getItem("accessToken")
+      if (token) {
+        const response = await api.get("/auth/login")
+        setUser(response.data)
+        return response.data
       }
+    } catch (error) {
+      console.log(error)
+      localStorage.removeItem("accessToken")
+      setUser(null)
+    } finally {
+      setLoading(false)
     }
+  }
 
+  useEffect(() => {
     checkAuth()
   }, [])
 
@@ -74,5 +76,5 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setUser(null)
   }
 
-  return <AuthContext.Provider value={{ user, loading, login, register, logout }}>{children}</AuthContext.Provider>
+  return <AuthContext.Provider value={{ user, loading, login, register, logout, checkAuth }}>{children}</AuthContext.Provider>
 }

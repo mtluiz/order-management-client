@@ -22,8 +22,8 @@ const Dashboard: React.FC = () => {
       try {
         const [projectsRes, serviceOrdersRes] = await Promise.all([projectApi.getAll(), serviceOrderApi.getAll()])
 
-        const projects = projectsRes.data
-        const serviceOrders = serviceOrdersRes.data
+        const projects = projectsRes.data.data
+        const serviceOrders = serviceOrdersRes.data.data
 
         setStats({
           totalProjects: projects.length,

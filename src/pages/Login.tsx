@@ -39,7 +39,7 @@ const Login = () => {
   const onSubmit = async (data: LoginFormValues) => {
     try {
       await login(data.email, data.password)
-      navigate("/projects")
+      navigate("/dashboard")
     } catch (err) {
       console.error(err)
       toast("Invalid email or password. Please try again.")

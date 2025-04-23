@@ -11,11 +11,39 @@ import ServiceOrders from "./pages/ServiceOrders"
 import ServiceOrderDetails from "./pages/ServiceOrderDetails"
 import { Layout } from "./components/Layout/layout"
 import { UpdatePrompt } from "./components/UpdatePrompt"
+import { useEffect, useState } from "react"
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
-  const { user } = useAuth()
+  const { user, loading, checkAuth } = useAuth()
+  const [isVerifying, setIsVerifying] = useState(true)
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
 
-  if (!user) {
+  useEffect(() => {
+    const verifyAuth = async () => {
+      try {
+        const userData = await checkAuth()
+        setIsAuthenticated(!!userData)
+      } catch (error) {
+        console.log(error)
+        setIsAuthenticated(false)
+      } finally {
+        setIsVerifying(false)
+      }
+    }
+
+    verifyAuth()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  if (isVerifying || loading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="animate-spin h-8 w-8 border-4 border-blue-500 rounded-full border-t-transparent"></div>
+      </div>
+    )
+  }
+
+  if (!isAuthenticated && !user) {
     return <Navigate to="/login" replace />
   }
 
@@ -30,7 +58,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route
-            path="/"
+            path="/dashboard"
             element={
               <ProtectedRoute>
                 <Layout>
