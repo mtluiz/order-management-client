@@ -52,5 +52,6 @@ export const mockAuthContext = (isAuthenticated = true) => {
     login: vi.fn(),
     logout: vi.fn(),
     register: vi.fn(),
+    checkAuth: vi.fn(),
   });
 }; 

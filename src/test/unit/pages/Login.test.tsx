@@ -82,6 +82,7 @@ describe('Login', () => {
       loading: false,
       logout: vi.fn(),
       register: vi.fn(),
+      checkAuth: vi.fn(),
     });
     
     renderLogin();

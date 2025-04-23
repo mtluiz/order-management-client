@@ -17,24 +17,27 @@ vi.mock('@/lib/api', () => ({
 }));
 
 describe('Projects Page Integration', () => {
-  const mockProjects: Project[] = [
-    {
-      id: '1',
-      name: 'Test Project 1',
-      description: 'Description for test project 1',
-      createdDate: '2023-01-01T00:00:00.000Z',
-      updatedDate: '2023-01-01T00:00:00.000Z',
-      isApproved: true
-    },
-    {
-      id: '2',
-      name: 'Test Project 2',
-      description: 'Description for test project 2',
-      createdDate: '2023-01-02T00:00:00.000Z',
-      updatedDate: '2023-01-02T00:00:00.000Z',
-      isApproved: false
-    }
-  ];
+  const mockProjects: { data: Project[], total: number } = {
+    data: [
+      {
+        id: '1',
+        name: 'Test Project 1',
+        description: 'Description for test project 1',
+        createdDate: '2023-01-01T00:00:00.000Z',
+        updatedDate: '2023-01-01T00:00:00.000Z',
+        isApproved: true
+      },
+      {
+        id: '2',
+        name: 'Test Project 2',
+        description: 'Description for test project 2',
+        createdDate: '2023-01-02T00:00:00.000Z',
+        updatedDate: '2023-01-02T00:00:00.000Z',
+        isApproved: false
+      }
+    ],
+    total: 2
+  };
 
   const newProject: Project = {
     id: '3',
@@ -51,6 +54,7 @@ describe('Projects Page Integration', () => {
       status: 200,
       statusText: 'OK',
       headers: {},
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       config: { headers: {} } as any
     };
   }
