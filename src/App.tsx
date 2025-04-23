@@ -10,6 +10,7 @@ import ProjectDetails from "./pages/ProjectDetails"
 import ServiceOrders from "./pages/ServiceOrders"
 import ServiceOrderDetails from "./pages/ServiceOrderDetails"
 import { Layout } from "./components/Layout/layout"
+import { UpdatePrompt } from "./components/UpdatePrompt"
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { user } = useAuth()
@@ -80,6 +81,7 @@ function App() {
           />
         </Routes>
         <Toaster position="top-right" expand={true} richColors />
+        <UpdatePrompt />
       </Router>
     </AuthProvider>
   )
