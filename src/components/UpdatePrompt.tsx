@@ -35,7 +35,7 @@ export function UpdatePrompt() {
   return (
     <>
       {(offlineReady || needRefresh) && (
-        <div className="fixed bottom-4 right-4 bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 z-50 max-w-sm">
+        <div className="fixed bottom-4 right-4 bg-white p-4 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 z-50 max-w-sm">
           {offlineReady && (
             <div className="flex flex-col gap-2">
               <p className="text-sm font-medium">App ready to work offline</p>

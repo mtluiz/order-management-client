@@ -40,7 +40,7 @@ const ProjectDetails: React.FC = () => {
       const project = await projectApi.getById(projectId)
       const serviceOrders = await serviceOrderApi.getByProject(projectId)
       setProject(project.data)
-      setServiceOrders(serviceOrders.data)
+      setServiceOrders(serviceOrders.data.data)
     } catch (error) {
       console.error(error)
       toast("Failed to fetch project data. Please try again.")
@@ -80,7 +80,7 @@ const ProjectDetails: React.FC = () => {
       await serviceOrderApi.delete(orderToDelete)
       if (id) {
         const response = await serviceOrderApi.getByProject(id)
-        setServiceOrders(response.data)
+        setServiceOrders(response.data.data)
       }
       toast("Service order deleted successfully.")
     } catch (error) {

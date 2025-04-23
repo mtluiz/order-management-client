@@ -44,7 +44,7 @@ const Projects: React.FC = () => {
     try {
       setLoading(true)
       const response = await projectApi.getAll()
-      setProjects(response.data)
+      setProjects(response.data.data)
     } catch (error) {
       console.error(error)
       toast.error("Failed to fetch projects. Please try again.")

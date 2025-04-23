@@ -26,7 +26,7 @@ const ServiceOrders: React.FC = () => {
     try {
       setLoading(true)
       const response = await serviceOrderApi.getAll()
-      setServiceOrders(response.data)
+      setServiceOrders(response.data.data)
     } catch (error) {
       console.error(error)
       toast.error("Failed to fetch service orders. Please try again.")

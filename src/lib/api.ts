@@ -24,7 +24,7 @@ api.interceptors.request.use(
 
 // Project API functions
 export const projectApi = {
-  getAll: () => api.get<Project[]>("/projects"),
+  getAll: () => api.get<{ data: Project[], total: number }>("/projects"),
   getById: (id: string) => api.get<Project>(`/projects/${id}`),
   create: (data: ProjectRequest) => api.post<Project>("/projects", data),
   update: (id: string, data: ProjectRequest) => api.put<Project>(`/projects/${id}`, data),
@@ -33,9 +33,9 @@ export const projectApi = {
 
 // ServiceOrder API functions
 export const serviceOrderApi = {
-  getAll: () => api.get<ServiceOrder[]>("/service-orders"),
+  getAll: () => api.get<{ data: ServiceOrder[], total: number }>("/service-orders"),
   getById: (id: string) => api.get<ServiceOrder>(`/service-orders/${id}`),
-  getByProject: (projectId: string) => api.get<ServiceOrder[]>(`/service-orders?projectId=${projectId}`),
+  getByProject: (projectId: string) => api.get<{ data: ServiceOrder[], total: number }>(`/service-orders?projectId=${projectId}`),
   create: (data: ServiceOrderRequest) => api.post<ServiceOrder>("/service-orders", data),
   update: (id: string, data: ServiceOrderRequest) => api.put<ServiceOrder>(`/service-orders/${id}`, data),
   delete: (id: string) => api.delete(`/service-orders/${id}`),

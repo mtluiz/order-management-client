@@ -44,14 +44,14 @@ const ServiceOrderDetails: React.FC = () => {
         return
       }
 
-      await serviceOrderApi.update(id, {
+      const response = await serviceOrderApi.update(id, {
         name: editedServiceOrder.name || "",
         category: editedServiceOrder.category || "",
         description: editedServiceOrder.description || "",
         projectId: editedServiceOrder.projectId || "",
         isApproved: editedServiceOrder.isApproved || false
       })
-      setServiceOrder({ ...serviceOrder, ...editedServiceOrder } as ServiceOrder)
+      setServiceOrder(response.data)
       setIsEditing(false)
       toast("Service order updated successfully.")
     } catch (error) {
