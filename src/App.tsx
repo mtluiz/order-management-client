@@ -10,7 +10,6 @@ import ProjectDetails from "./pages/ProjectDetails"
 import ServiceOrders from "./pages/ServiceOrders"
 import ServiceOrderDetails from "./pages/ServiceOrderDetails"
 import { Layout } from "./components/Layout/layout"
-import { UpdatePrompt } from "./components/UpdatePrompt"
 import { useEffect, useState } from "react"
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -57,6 +56,16 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <Layout>
+                  <Dashboard />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/dashboard"
             element={
@@ -109,7 +118,6 @@ function App() {
           />
         </Routes>
         <Toaster position="top-right" expand={true} richColors />
-        <UpdatePrompt />
       </Router>
     </AuthProvider>
   )
