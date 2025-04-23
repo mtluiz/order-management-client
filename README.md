@@ -51,19 +51,6 @@ pnpm dev
 The application can be run in a Docker container for consistent development and deployment environments.
 
 ```bash
-# Build the Docker image
-docker build -t order-management-client .
-
-# Run the container
-docker run -p 3000:80 order-management-client
-
-# With environment variables
-docker run -p 3000:80 -e VITE_API_URL=https://api.example.com order-management-client
-```
-
-You can also use Docker Compose:
-
-```bash
 # Start the application
 docker-compose up
 
@@ -117,22 +104,6 @@ pnpm test:watch
 npm run test:coverage
 # or
 pnpm test:coverage
-```
-
-### End-to-End Tests
-
-End-to-end tests with Cypress simulate real user interactions with the complete application.
-
-```bash
-# Open Cypress UI
-npm run cypress:open
-# or
-pnpm cypress:open
-
-# Run headless
-npm run cypress:run
-# or
-pnpm cypress:run
 ```
 
 ## Project Structure
